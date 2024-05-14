@@ -3,6 +3,10 @@
 A Server emulator for the game [`Honkai: Star Rail`](https://hsr.hoyoverse.com/en-us/)
 ![screenshot](https://git.xeondev.com/reversedrooms/FireflySR/raw/branch/master/screenshot.png)
 
+## Prerequisites
+
+- [MongoDB](https://www.mongodb.com/try/download/community)
+
 ## Installation
 
 ### From Source
@@ -10,7 +14,6 @@ A Server emulator for the game [`Honkai: Star Rail`](https://hsr.hoyoverse.com/e
 #### Requirements
 
 - [Rust](https://www.rust-lang.org/tools/install)
-- [MongoDB](https://www.mongodb.com/try/download/community)
 
 #### Building
 
@@ -54,7 +57,7 @@ By default, servers will try to use local mongodb (at 127.0.0.1:27017),
 this should work out of box if you installed MongoDB on your machine.
 <br>
 You can change this in configuration file of specific server.
-Currently only 2 servers communicate with database, so if you **need** to configure it,
+Currently only sdkserver and gameserver communicate with database, so if you **need** to configure it,
 edit sdkserver.json and gameserver.json files.
 
 ## Connecting
