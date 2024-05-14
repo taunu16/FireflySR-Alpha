@@ -10,7 +10,7 @@ use tokio::{
 
 use crate::game::{GameContext, PlayerInfo};
 
-use super::{packet::CommandHandler, NetPacket};
+use super::{packet::NetCommandHandler, NetPacket};
 
 pub struct PlayerSession {
     client_socket: Arc<Mutex<TcpStream>>,
@@ -82,4 +82,4 @@ impl PlayerSession {
 }
 
 // Auto implemented
-impl CommandHandler for PlayerSession {}
+impl NetCommandHandler for PlayerSession {}

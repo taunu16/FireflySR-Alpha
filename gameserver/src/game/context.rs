@@ -16,7 +16,6 @@ pub struct GameContext {
     logged_in: OnceCell<()>,
     pub player: Arc<AtomicRefCell<PlayerInfo>>,
     pub avatar_mgr: Arc<AtomicRefCell<AvatarManager>>,
-    pub command_mgr: Arc<AtomicRefCell<CommandManager>>,
     pub hero_basic_type_mgr: Arc<AtomicRefCell<HeroBasicTypeManager>>,
     pub item_mgr: Arc<AtomicRefCell<ItemManager>>,
     pub lineup_mgr: Arc<AtomicRefCell<LineupManager>>,
@@ -38,8 +37,7 @@ impl GameContext {
         Self {
             logged_in: OnceCell::new(),
             player: player.clone(),
-            avatar_mgr: avatar_mgr.clone(),
-            command_mgr: Arc::new(AtomicRefCell::new(CommandManager::new(item_mgr.clone()))),
+            avatar_mgr,
             hero_basic_type_mgr: Arc::new(AtomicRefCell::new(HeroBasicTypeManager::new(
                 player.clone(),
             ))),

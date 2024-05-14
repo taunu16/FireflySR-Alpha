@@ -59,7 +59,7 @@ impl NetPacket {
 
 macro_rules! trait_handler {
     ($($name:ident $cmd_type:expr;)*) => {
-        pub trait CommandHandler {
+        pub trait NetCommandHandler {
             $(
                 paste! {
                     async fn [<on_$name:snake>](session: &PlayerSession, body: &$name) -> Result<()> {

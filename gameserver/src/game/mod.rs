@@ -1,3 +1,4 @@
+pub mod commands;
 mod context;
 mod gameplay_config;
 pub mod managers;
