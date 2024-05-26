@@ -3,3 +3,4 @@ Cargo.lock
 proto/StarRail.proto
 proto/nameTranslation.txt
 /*.json
+.idea

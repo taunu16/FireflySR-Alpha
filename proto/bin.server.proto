@@ -8,6 +8,7 @@ message PlayerBasicCompBin {
 	uint32 login_times = 4;
 	int64 created_timestamp = 5;
 	int64 last_login_timestamp = 6;
+	uint32 world_level = 7;
 }
 
 message PlayerAvatarCompBin {
@@ -31,11 +32,18 @@ message AvatarBin {
 	map<uint32, uint32> relic_map = 9;
 }
 
+message LineupBuff {
+	uint32 avatar_id = 1;
+	uint32 buff_id = 2;
+	uint32 slot = 3;
+}
+
 message PlayerLineupCompBin {
 	repeated LineupBin lineup_list = 1;
 	uint32 cur_lineup_index = 2;
 	uint32 mp = 3;
 	uint32 mp_max = 4;
+	repeated LineupBuff buffs = 5;
 }
 
 message LineupBin {
@@ -133,12 +141,22 @@ message MotionBin {
 	VectorBin rot = 2;
 }
 
+message PropBin {
+	uint32 entity_id = 1;
+	uint32 state = 2;
+}
+
+message GroupBin {
+	repeated PropBin prop_list = 1;
+}
+
 message SceneBin {
 	uint32 plane_id = 1;
 	uint32 floor_id = 2;
 	repeated uint32 lighten_section_list = 3;
 	repeated uint32 unlocked_teleport_list = 4;
 	int64 last_enter_time = 5;
+	map<uint32, GroupBin> group_map = 6;
 }
 
 message PlayerSceneCompBin {

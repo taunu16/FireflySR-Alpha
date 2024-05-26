@@ -1,5 +1,5 @@
 use anyhow::Result;
-use atomic_refcell::{AtomicRef, AtomicRefCell};
+use atomic_refcell::{AtomicRef, AtomicRefCell, AtomicRefMut};
 use prost::Message;
 use std::sync::Arc;
 use tokio::{
@@ -78,6 +78,10 @@ impl PlayerSession {
 
     pub fn player_info(&self) -> AtomicRef<PlayerInfo> {
         self.player_info.borrow()
+    }
+
+    pub fn player_info_mut(&self) -> AtomicRefMut<PlayerInfo> {
+        self.player_info.borrow_mut()
     }
 }
 

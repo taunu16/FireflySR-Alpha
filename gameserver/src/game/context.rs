@@ -7,6 +7,7 @@ use proto::PlayerDataBin;
 use tokio::sync::OnceCell;
 
 use crate::database;
+use crate::net::PlayerSession;
 use crate::util;
 
 use super::managers::*;
@@ -16,6 +17,8 @@ pub struct GameContext {
     logged_in: OnceCell<()>,
     pub player: Arc<AtomicRefCell<PlayerInfo>>,
     pub avatar_mgr: Arc<AtomicRefCell<AvatarManager>>,
+    pub battle_mgr: Arc<AtomicRefCell<BattleManager>>,
+    pub challenge_mgr: Arc<AtomicRefCell<ChallengeManager>>,
     pub hero_basic_type_mgr: Arc<AtomicRefCell<HeroBasicTypeManager>>,
     pub item_mgr: Arc<AtomicRefCell<ItemManager>>,
     pub lineup_mgr: Arc<AtomicRefCell<LineupManager>>,
@@ -38,6 +41,8 @@ impl GameContext {
             logged_in: OnceCell::new(),
             player: player.clone(),
             avatar_mgr,
+            battle_mgr: Arc::new(AtomicRefCell::new(BattleManager::new(player.clone()))),
+            challenge_mgr: Arc::new(AtomicRefCell::new(ChallengeManager::new(player.clone()))),
             hero_basic_type_mgr: Arc::new(AtomicRefCell::new(HeroBasicTypeManager::new(
                 player.clone(),
             ))),
@@ -64,12 +69,12 @@ impl GameContext {
         player_info.data = player_bin;
     }
 
-    pub async fn on_player_logged_in(&self) -> Result<()> {
+    pub async fn on_player_logged_in(&self, session: &PlayerSession) -> Result<()> {
         self.logged_in.set(())?;
 
         let mut scene_mgr = self.scene_mgr.borrow_mut();
         let entry_id = scene_mgr.cur_entry_id();
-        scene_mgr.enter_scene(entry_id).unwrap();
+        scene_mgr.enter_scene(session, entry_id).unwrap();
 
         let mut player_info = self.player.borrow_mut();
         let basic_comp = player_info.data.basic_bin.as_mut().unwrap();
@@ -112,6 +117,7 @@ impl GameContext {
             nickname: basic_comp.nickname.clone(),
             level: basic_comp.level,
             exp: basic_comp.exp,
+            world_level: basic_comp.world_level,
             stamina: 240,
             ..Default::default()
         }
@@ -120,6 +126,8 @@ impl GameContext {
     pub fn init_default_player(&self) {
         self.init_player_data();
         self.hero_basic_type_mgr.borrow().init_defaults();
+        self.battle_mgr.borrow().init_defaults();
+        self.challenge_mgr.borrow().init_defaults();
         self.avatar_mgr.borrow().init_defaults();
         self.lineup_mgr.borrow().init_defaults();
         self.item_mgr.borrow().init_defaults();

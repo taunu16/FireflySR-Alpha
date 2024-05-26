@@ -1,7 +1,8 @@
-# FireflySR
+# FireflySR-Alpha 
+>Original: https://git.xeondev.com/reversedrooms/FireflySR
 
 A Server emulator for the game [`Honkai: Star Rail`](https://hsr.hoyoverse.com/en-us/)
-![screenshot](https://git.xeondev.com/reversedrooms/FireflySR/raw/branch/master/screenshot.png)
+![screenshot](https://github.com/taunu16/FireflySR-Alpha/blob/master/screenshot.png?raw=true)
 
 ## Prerequisites
 
@@ -9,11 +10,13 @@ A Server emulator for the game [`Honkai: Star Rail`](https://hsr.hoyoverse.com/e
 
 ## Installation
 
-### From Source
+### From Source (recommended)
 
 #### Requirements
 
 - [Rust](https://www.rust-lang.org/tools/install)
+- [MongoDB](https://www.mongodb.com/try/download/community-edition)
+- [Protobuf Compiler (protoc)](https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protoc-26.1-win64.zip). You should manually extract it to somewhere and add `bin` subfolder to the system environment variable `PATH`.
 
 #### Building
 
@@ -62,7 +65,22 @@ edit sdkserver.json and gameserver.json files.
 
 ## Connecting
 
-[Get 2.3 beta client](https://autopatchos.starrails.com/client/Beta/20240501125700_dUBAjS7YiX9nF7mJ/StarRail_2.2.51.zip),
+### For the latest 2.3 Beta patch
+
+If you want to play the latest Beta patch, the `mhypbase.dll` patch for 2.2.51 OS is not usable. You should use a separate proxy like [FireflySR.Tool.Proxy](https://git.xeondev.com/YYHEggEgg/FireflySR.Tool.Proxy) (Prebuilt binary can be downloaded [here](https://git.xeondev.com/YYHEggEgg/FireflySR.Tool.Proxy/releases)).
+
+Also, you need to configure `check_passwords` in `sdkserver.json`. That is to say, if you have used a older version, you should go to the configuration file **in the root directory** and check if it's `false`.
+
+Clients (2.3 Beta v3):
+
+- [CN - 2.2.53](https://autopatchcn.bhsr.com/client/beta/20240517110535_d7lJoh4jYXkVGXI1/StarRail_2.2.53.zip)
+- [OS - .2.53](https://autopatchos.starrails.com/client/Beta/20240517111205_PZfNSHVLH509e76v/StarRail_.2.53.zip)
+
+Notice: **CN Package may not have languages other than Chinese, and vice versa**. Be careful when choosing which to download; luckily they are all compatiable with this server.
+
+### For v1 Players
+
+[Get 2.3 beta client v1(.51)](https://autopatchos.starrails.com/client/Beta/20240501125700_dUBAjS7YiX9nF7mJ/StarRail_2.2.51.zip),
 replace [mhypbase.dll](https://git.xeondev.com/reversedrooms/FireflySR/raw/branch/master/mhypbase.dll)
 file in your game folder, it will redirect game traffic (and disable in-game censorship)
 

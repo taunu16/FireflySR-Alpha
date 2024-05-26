@@ -13,6 +13,7 @@ pub fn init_config() {
 pub struct SDKServerConfiguration {
     pub http_port: u16,
     pub dispatch_endpoint: String,
+    pub check_passwords: bool, //disable if it says that patch is outdated
     pub database: DatabaseConfig,
 }
 

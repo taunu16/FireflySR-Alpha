@@ -42,7 +42,7 @@ pub async fn on_player_login_cs_req(
         session.context.init_default_player();
     }
 
-    session.context.on_player_logged_in().await?;
+    session.context.on_player_logged_in(session).await?;
     session
         .send(
             CMD_PLAYER_LOGIN_SC_RSP,

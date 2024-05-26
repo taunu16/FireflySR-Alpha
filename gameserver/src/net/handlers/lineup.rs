@@ -87,7 +87,7 @@ pub async fn on_join_lineup_cs_req(session: &PlayerSession, body: &JoinLineupCsR
     lineup_mgr.sync_cur_lineup(session).await?;
 
     let mut scene_mgr = session.context.scene_mgr.borrow_mut();
-    if let Some(refresh_info) = scene_mgr.refresh_actor_group() {
+    if let Some(refresh_info) = scene_mgr.refresh_actor_group(session.context.lineup_mgr.borrow()) {
         session
             .send(
                 CMD_SCENE_GROUP_REFRESH_SC_NOTIFY,
@@ -110,7 +110,7 @@ pub async fn on_replace_lineup_cs_req(
     let lineup_mgr = session.context.lineup_mgr.borrow();
 
     if let Err(retcode) =
-        lineup_mgr.replace_lineup(body.index, body.leader_slot, &body.replace_slot_list)
+        lineup_mgr.replace_lineup(body.index, body.leader_slot, &body.replace_slot_list, body.extra_lineup_type())
     {
         return session
             .send(
@@ -123,7 +123,7 @@ pub async fn on_replace_lineup_cs_req(
     }
 
     let mut scene_mgr = session.context.scene_mgr.borrow_mut();
-    if let Some(refresh_info) = scene_mgr.refresh_actor_group() {
+    if let Some(refresh_info) = scene_mgr.refresh_actor_group(session.context.lineup_mgr.borrow()) {
         session
             .send(
                 CMD_SCENE_GROUP_REFRESH_SC_NOTIFY,

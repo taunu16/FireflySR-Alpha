@@ -1,6 +1,7 @@
 {
 	"http_port": 21000,
 	"dispatch_endpoint": "http://127.0.0.1:21041",
+	"check_passwords": false,
 	"database": {
 		"connection_string": "mongodb://127.0.0.1:27017",
 		"name": "FireflySR",

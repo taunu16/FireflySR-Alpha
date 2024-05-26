@@ -3,7 +3,7 @@ use common::document::AccountDocument;
 use serde::Deserialize;
 use serde_json::json;
 
-use crate::{database, util, SdkContext};
+use crate::{config::CONFIGURATION, database, util, SdkContext};
 
 const LOGIN: &str = "/:product_name/mdk/shield/api/login";
 const VERIFY: &str = "/:product_name/mdk/shield/api/verify";
@@ -31,6 +31,16 @@ async fn login(
     State(context): State<SdkContext>,
     Json(request): Json<LoginRequest>,
 ) -> Json<serde_json::Value> {
+    if !CONFIGURATION.check_passwords {
+        let account = match database::get_account_by_name(&context.db_client, &request.account).await {
+            Ok(Some(account)) => account,
+            Ok(None) => return fail_json(-101, "Account error"),
+            Err(_) => return fail_json(-1, "Internal server error"),
+        };
+
+        return success_json(account);
+    }
+
     if !request.is_crypto {
         return fail_json(
             -10,
@@ -39,7 +49,7 @@ async fn login(
     }
 
     let Ok(password) = util::decrypt_string(&request.password) else {
-        return fail_json(-10, "Your patch is outdated.\r\nGet new one at https://discord.gg/reversedrooms\r\n(Password decryption failed)");
+        return fail_json(-10, "Your patch is outdated.\r\nGet new one at https://discord.gg/reversedrooms\r\n(Password decryption failed)\r\n(you can disable password checking in sdkserver config)");
     };
 
     let account = match database::get_account_by_name(&context.db_client, &request.account).await {

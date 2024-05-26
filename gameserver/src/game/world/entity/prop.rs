@@ -2,6 +2,7 @@ use proto::{MotionInfo, SceneEntityInfo, ScenePropInfo, Vector, VectorBin};
 
 use super::{EntityType, SceneEntity};
 
+#[derive(PartialEq, Clone, Debug)]
 pub struct SceneProp {
     position: VectorBin,
     rotation: VectorBin,
@@ -9,20 +10,37 @@ pub struct SceneProp {
     group_id: u32,
     inst_id: u32,
     prop_id: u32,
+    event_id: u32,
+    #[allow(dead_code)]
+    mapping_info_id: u32,
     pub state: u32,
 }
 
 impl SceneProp {
-    pub fn new(entity_id: u32, group_id: u32, inst_id: u32, prop_id: u32) -> Self {
+    pub fn new(entity_id: u32, group_id: u32, inst_id: u32, prop_id: u32, event_id: u32, mapping_info_id: u32) -> Self {
         Self {
             entity_id,
             group_id,
             inst_id,
             prop_id,
+            mapping_info_id,
+            event_id,
             state: 1,
             position: VectorBin::default(),
             rotation: VectorBin::default(),
         }
+    }
+
+    pub fn prop_id(&self) -> u32 {
+        self.prop_id
+    }
+
+    // pub fn inst_id(&self) -> u32 {
+    //     self.inst_id
+    // }
+
+    pub fn event_id(&self) -> u32 {
+        self.event_id
     }
 }
 

@@ -2,6 +2,7 @@ use proto::{MotionInfo, SceneActorInfo, SceneEntityInfo, Vector, VectorBin};
 
 use super::{EntityType, SceneEntity};
 
+#[derive(Debug, Clone)]
 pub struct SceneActor {
     position: VectorBin,
     rotation: VectorBin,

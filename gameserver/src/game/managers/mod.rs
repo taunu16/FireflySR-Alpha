@@ -3,6 +3,8 @@ use atomic_refcell::AtomicRefCell;
 use std::sync::{Arc, Weak};
 
 mod avatar;
+mod battle;
+mod challenge;
 mod hero_basic_type;
 mod item;
 mod lineup;
@@ -11,6 +13,8 @@ mod time;
 mod tutorial;
 
 pub use avatar::AvatarManager;
+pub use battle::BattleManager;
+pub use challenge::ChallengeManager;
 pub use hero_basic_type::HeroBasicTypeManager;
 pub use item::ItemManager;
 pub use lineup::LineupManager;

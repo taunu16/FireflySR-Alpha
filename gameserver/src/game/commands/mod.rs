@@ -5,6 +5,7 @@ use crate::{net::PlayerSession, util};
 
 mod avatar;
 mod relic;
+mod reset;
 mod scene;
 
 macro_rules! commands {
@@ -13,7 +14,16 @@ macro_rules! commands {
             let input = command[1..].split(" ").collect::<Vec<&str>>();
 
             let (Some(category), Some(action)) = (input.get(0), input.get(1)) else {
-                return send_text(session, "Usage: /[category] [action] [arg1] [arg2] ...").await;
+                let mut help_text = "Available Commands: ".to_string();
+                $(
+                    help_text.push_str(stringify!($category));
+                    help_text.push_str(" ");
+                    help_text.push_str(stringify!($action));
+                    help_text.push_str("; ");
+                )*
+                let _ = send_text(session, &help_text).await;
+                let _ = send_text(session, "Usage: /[category] [action] [arg1] [arg2] ...").await;
+                return send_text(session, "Type /[category] [action] to get more detailed help.").await;
             };
 
             let args = &input[2..];
@@ -41,6 +51,7 @@ commands! {
     avatar max_traces;
     relic give;
     scene enter;
+    reset propstates;
 }
 
 async fn send_text(session: &PlayerSession, content: &str) -> Result<()> {

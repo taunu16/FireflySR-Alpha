@@ -33,6 +33,17 @@ pub struct ExcelCollection {
     pub map_entrance_configs: Vec<MapEntranceConfig>,
     pub tutorial_configs: Vec<TutorialConfig>,
     pub tutorial_guide_group_configs: Vec<TutorialGuideGroupConfig>,
+    pub main_mission_configs: Vec<MainMissionConfig>,
+    pub activity_panel_configs: Vec<ActivityPanelConfig>,
+    pub challenge_maze_configs: Vec<ChallengeMazeConfig>,
+    pub plane_event_configs: Vec<PlaneEventConfig>,
+    pub interact_configs: Vec<InteractConfig>,
+    pub reward_configs: Vec<RewardConfig>,
+    pub shop_configs: Vec<ShopConfig>,
+    pub shop_goods_configs: Vec<ShopGoodsConfig>,
+    pub maze_plane_configs: Vec<MazePlaneConfig>,
+    pub stage_configs: Vec<StageConfig>,
+    pub challenge_story_extra_configs: Vec<ChallengeStoryExtraConfig>,
 }
 
 impl ExcelCollection {
@@ -53,11 +64,22 @@ impl ExcelCollection {
                 "ExcelOutput/TutorialGuideGroupConfig.json",
             ))
             .unwrap(),
+            main_mission_configs: from_str(&load_asset("ExcelOutput/MainMissionConfig.json")).unwrap(),
+            activity_panel_configs: from_str(&load_asset("ExcelOutput/ActivityPanelConfig.json")).unwrap(),
+            challenge_maze_configs: from_str(&load_asset("ExcelOutput/ChallengeMazeConfig.json")).unwrap(),
+            plane_event_configs: from_str(&load_asset("ExcelOutput/PlaneEventConfig.json")).unwrap(),
+            interact_configs: from_str(&load_asset("ExcelOutput/InteractConfig.json")).unwrap(),
+            reward_configs: from_str(&load_asset("ExcelOutput/RewardConfig.json")).unwrap(),
+            shop_configs: from_str(&load_asset("ExcelOutput/ShopConfig.json")).unwrap(),
+            shop_goods_configs: from_str(&load_asset("ExcelOutput/ShopGoodsConfig.json")).unwrap(),
+            maze_plane_configs: from_str(&load_asset("ExcelOutput/MazePlaneConfig.json")).unwrap(),
+            stage_configs: from_str(&load_asset("ExcelOutput/StageConfig.json")).unwrap(),
+            challenge_story_extra_configs: from_str(&load_asset("ExcelOutput/ChallengeStoryExtraConfig.json")).unwrap(),
         }
     }
 
     pub fn table_count(&self) -> usize {
-        8
+        18
     }
 }
 

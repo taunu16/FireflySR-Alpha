@@ -58,7 +58,7 @@ impl NetPacket {
 }
 
 macro_rules! trait_handler {
-    ($($name:ident $cmd_type:expr;)*) => {
+    ($($name:ident $cmd_type:pat,)*) => {
         pub trait NetCommandHandler {
             $(
                 paste! {
@@ -75,6 +75,31 @@ macro_rules! trait_handler {
                     return Ok(());
                 }
                 match cmd_type {
+                    // CMD_SCENE_ENTER_STAGE_CS_REQ => {
+                    //     println!("{}: {}", cmd_type, rbase64::encode(&payload));
+                    //     Ok(())
+                    // }
+                    CMD_LEAVE_CHALLENGE_CS_REQ => {
+                        paste! {
+                            on_leave_challenge_cs_req(session)
+                                .instrument(tracing::info_span!(stringify!(on_leave_challenge_cs_req), cmd_type = cmd_type))
+                                .await
+                        }
+                    }
+                    CMD_PLAYER_HEART_BEAT_CS_REQ => {
+                        on_player_heart_beat_cs_req(session, &PlayerHeartBeatCsReq::decode(&mut &payload[..])?).await
+                    }
+                    CMD_SCENE_ENTITY_MOVE_CS_REQ => {
+                        on_scene_entity_move_cs_req(session, &SceneEntityMoveCsReq::decode(&mut &payload[..])?).await
+                    }
+                    CMD_P_V_E_BATTLE_RESULT_CS_REQ => {
+                        let body = PveBattleResultCsReq::decode(&mut &payload[..])?;
+                        paste! {
+                            on_pve_battle_result_cs_req(session, &body)
+                                .instrument(tracing::info_span!(stringify!(on_pve_battle_result_cs_req), cmd_type = cmd_type))
+                                .await
+                        }
+                    }
                     $(
                         $cmd_type => {
                             let body = $name::decode(&mut &payload[..])?;
@@ -95,36 +120,60 @@ macro_rules! trait_handler {
     };
 }
 
-trait_handler! {
-    GetAvatarDataCsReq 361;
-    TakeOffEquipmentCsReq 362;
-    TakeOffRelicCsReq 303;
-    DressAvatarCsReq 387;
-    DressRelicAvatarCsReq 321;
-    PveBattleResultCsReq 161;
-    GetBagCsReq 561;
-    GetAllLineupDataCsReq 756;
-    JoinLineupCsReq 739;
-    ChangeLineupLeaderCsReq 794;
-    ReplaceLineupCsReq 709;
-    QuitLineupCsReq 730;
-    GetCurLineupDataCsReq 791;
-    GetCurBattleInfoCsReq 139;
-    GetMissionStatusCsReq 1256;
-    PlayerGetTokenCsReq 39;
-    PlayerLoginCsReq 61;
-    PlayerHeartBeatCsReq 42;
-    GetHeroBasicTypeInfoCsReq 68;
-    GetBasicInfoCsReq 90;
-    GetCurSceneInfoCsReq 1430;
-    SceneEntityMoveCsReq 1461;
-    StartCocoonStageCsReq 1413;
-    EnterSectionCsReq 1428;
-    GetSceneMapInfoCsReq 1484;
-    EnterSceneCsReq 1480;
-    GetTutorialGuideCsReq 1691;
-    UnlockTutorialGuideCsReq 1630;
-    GetTutorialCsReq 1661;
-    GetFriendListInfoCsReq 2961;
-    SendMsgCsReq 3961;
+macro_rules! trait_handler_auto {
+    ($($name:ident;)*) => {
+        paste! {
+            trait_handler! { 
+                $(
+                    $name [<CMD_$name:snake:upper>],
+                )*
+            }
+        }
+    }
+}
+
+trait_handler_auto! {
+    GetAvatarDataCsReq;
+    TakeOffEquipmentCsReq;
+    TakeOffRelicCsReq;
+    DressAvatarCsReq;
+    DressRelicAvatarCsReq;
+    GetBagCsReq;
+    GetAllLineupDataCsReq;
+    JoinLineupCsReq;
+    ChangeLineupLeaderCsReq;
+    ReplaceLineupCsReq;
+    QuitLineupCsReq;
+    GetCurLineupDataCsReq;
+    GetCurBattleInfoCsReq;
+    GetMissionStatusCsReq;
+    PlayerGetTokenCsReq;
+    PlayerLoginCsReq;
+    GetHeroBasicTypeInfoCsReq;
+    GetBasicInfoCsReq;
+    GetCurSceneInfoCsReq;
+    StartCocoonStageCsReq;
+    EnterSectionCsReq;
+    GetSceneMapInfoCsReq;
+    EnterSceneCsReq;
+    GetTutorialGuideCsReq;
+    UnlockTutorialGuideCsReq;
+    GetTutorialCsReq;
+    GetFriendListInfoCsReq;
+    SendMsgCsReq;
+    GetFirstTalkByPerformanceNpcCsReq;
+    GetNpcTakenRewardCsReq;
+    GetFirstTalkNpcCsReq;
+    FinishTalkMissionCsReq;
+    GetActivityScheduleConfigCsReq;
+    StartChallengeCsReq;
+    InteractPropCsReq;
+    GroupStateChangeCsReq;
+    GetShopListCsReq;
+    SceneEnterStageCsReq;
+    SceneCastSkillCsReq;
+    GetCurChallengeCsReq;
+    GetChallengeCsReq;
+    GetArchiveDataCsReq;
+    GetUpdatedArchiveDataCsReq;
 }

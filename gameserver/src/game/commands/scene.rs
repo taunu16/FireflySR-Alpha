@@ -6,7 +6,7 @@ pub async fn enter(args: &[&str], session: &PlayerSession) -> Result<()> {
     };
 
     let mut scene_mgr = session.context.scene_mgr.borrow_mut();
-    let scene = match scene_mgr.enter_scene(entry_id) {
+    let scene = match scene_mgr.enter_scene(session, entry_id) {
         Ok(scene_info) => Some(scene_info),
         Err(_) => return send_text(session, &format!("Failed to enter scene {entry_id}.")).await,
     };

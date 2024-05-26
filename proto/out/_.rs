@@ -468,9 +468,9 @@ pub struct BattleTarget {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Cnngaoldopi {
+pub struct BattleTargetList {
     #[prost(message, repeated, tag = "1")]
-    pub fdfcmhbhnmc: ::prost::alloc::vec::Vec<BattleTarget>,
+    pub battle_target_list: ::prost::alloc::vec::Vec<BattleTarget>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -484,7 +484,7 @@ pub struct BattleLineup {
     #[prost(uint32, tag = "7")]
     pub world_level: u32,
     #[prost(map = "uint32, message", tag = "9")]
-    pub jelkfckaonl: ::std::collections::HashMap<u32, Cnngaoldopi>,
+    pub battle_target_info: ::std::collections::HashMap<u32, BattleTargetList>,
     #[prost(message, optional, tag = "10")]
     pub cchiiefgogb: ::core::option::Option<Lnifncaliom>,
     #[prost(message, repeated, tag = "11")]
@@ -725,7 +725,7 @@ pub struct Elbdnigghoe {
     #[prost(double, tag = "2")]
     pub fipghgjbbea: f64,
     #[prost(uint32, repeated, tag = "3")]
-    pub fdfcmhbhnmc: ::prost::alloc::vec::Vec<u32>,
+    pub battle_target_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(double, tag = "4")]
     pub damage: f64,
 }
@@ -1221,7 +1221,7 @@ pub struct BattleStatistics {
     #[prost(message, repeated, tag = "27")]
     pub nkpgaedgbfn: ::prost::alloc::vec::Vec<Fjbcpoonjbk>,
     #[prost(map = "uint32, message", tag = "28")]
-    pub jelkfckaonl: ::std::collections::HashMap<u32, Cnngaoldopi>,
+    pub battle_target_info: ::std::collections::HashMap<u32, BattleTargetList>,
     #[prost(message, repeated, tag = "29")]
     pub cghlbglnbhf: ::prost::alloc::vec::Vec<Ffejphhhgpc>,
     #[prost(message, optional, tag = "30")]
@@ -1353,7 +1353,7 @@ pub struct Neghnnkjcih {
     #[prost(message, optional, tag = "2")]
     pub mccacfkdmdk: ::core::option::Option<Objpldjbjpp>,
     #[prost(message, optional, tag = "3")]
-    pub leiglhbeaan: ::core::option::Option<Ndkcbdpolah>,
+    pub story_info: ::core::option::Option<Ndkcbdpolah>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1446,7 +1446,7 @@ pub struct Ahkddjlkiab {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Igbgpkmcdkb {
+pub struct ActivityScheduleInfo {
     #[prost(uint32, tag = "12")]
     pub dnallopkkfi: u32,
     #[prost(int64, tag = "10")]
@@ -1458,14 +1458,14 @@ pub struct Igbgpkmcdkb {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ahjdibkmfjk {}
+pub struct GetActivityScheduleConfigCsReq {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Hpmcldlfnbp {
+pub struct GetActivityScheduleConfigScRsp {
     #[prost(uint32, tag = "15")]
     pub retcode: u32,
     #[prost(message, repeated, tag = "2")]
-    pub aaeiliipmni: ::prost::alloc::vec::Vec<Igbgpkmcdkb>,
+    pub activity_schedule_list: ::prost::alloc::vec::Vec<ActivityScheduleInfo>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1693,15 +1693,15 @@ pub struct Ihpkmgbbgpe {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Kbaeckjfcja {
     #[prost(uint32, tag = "12")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(uint32, tag = "13")]
-    pub dmkhognonbl: u32,
+    pub caster_id: u32,
     #[prost(uint32, repeated, tag = "14")]
-    pub igkjjpeealc: ::prost::alloc::vec::Vec<u32>,
+    pub hit_target_entity_id_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(uint32, tag = "8")]
     pub skill_index: u32,
     #[prost(message, repeated, tag = "3")]
-    pub lchclicihdm: ::prost::alloc::vec::Vec<Kfgkicflahn>,
+    pub assist_monster_wave_list: ::prost::alloc::vec::Vec<AssistMonsterWave>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1709,7 +1709,7 @@ pub struct Hhfogahjooe {
     #[prost(message, optional, tag = "8")]
     pub battle_info: ::core::option::Option<Fjojkdhlonn>,
     #[prost(uint32, tag = "3")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(uint32, tag = "9")]
     pub retcode: u32,
 }
@@ -1717,7 +1717,7 @@ pub struct Hhfogahjooe {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Bobkjmpmifa {
     #[prost(uint32, tag = "2")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "9")]
     pub gnipfmoloja: u32,
 }
@@ -1931,7 +1931,7 @@ pub struct Gfcnfgcmmig {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Nnapgjljnmn {
     #[prost(uint32, tag = "1")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1968,7 +1968,7 @@ pub struct Cmnphlhjeib {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Chkokdfcjai {
     #[prost(uint32, tag = "5")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1976,7 +1976,7 @@ pub struct Pmibmbbphjb {
     #[prost(message, optional, tag = "15")]
     pub reward: ::core::option::Option<ItemList>,
     #[prost(uint32, tag = "14")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "5")]
     pub retcode: u32,
 }
@@ -2381,7 +2381,7 @@ pub struct Gfdmodmlole {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Lccaialoael {
+pub struct ArchiveData {
     #[prost(uint32, repeated, tag = "14")]
     pub jeklfcamdki: ::prost::alloc::vec::Vec<u32>,
     #[prost(uint32, repeated, tag = "1")]
@@ -2395,25 +2395,25 @@ pub struct Lccaialoael {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Jikbkkkbpag {}
+pub struct GetArchiveDataCsReq {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Jbpfmgokpkk {
+pub struct GetArchiveDataScRsp {
     #[prost(uint32, tag = "4")]
     pub retcode: u32,
     #[prost(message, optional, tag = "9")]
-    pub bkcflgbcjmi: ::core::option::Option<Lccaialoael>,
+    pub archive_data: ::core::option::Option<ArchiveData>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Eijkgdkdppm {}
+pub struct GetUpdatedArchiveDataCsReq {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Phidmijcana {
+pub struct GetUpdatedArchiveDataScRsp {
     #[prost(uint32, tag = "9")]
     pub retcode: u32,
     #[prost(message, optional, tag = "2")]
-    pub bkcflgbcjmi: ::core::option::Option<Lccaialoael>,
+    pub archive_data: ::core::option::Option<ArchiveData>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2982,7 +2982,7 @@ pub struct Ifbdahalclh {
     #[prost(uint32, tag = "15")]
     pub nldbmcdiddo: u32,
     #[prost(uint32, tag = "3")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, repeated, tag = "5")]
     pub avatar_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(uint32, tag = "6")]
@@ -2997,7 +2997,7 @@ pub struct Aihgeigecki {
     #[prost(uint32, tag = "1")]
     pub retcode: u32,
     #[prost(message, repeated, tag = "10")]
-    pub elfejgoegcj: ::prost::alloc::vec::Vec<Ifbdahalclh>,
+    pub challenge_list: ::prost::alloc::vec::Vec<Ifbdahalclh>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3011,7 +3011,7 @@ pub struct Modfpkkndjn {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dodhlcpbeib {
     #[prost(uint32, tag = "3")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, repeated, tag = "12")]
     pub avatar_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(message, repeated, tag = "1")]
@@ -3031,7 +3031,7 @@ pub struct Fcaabgfkjhh {
     #[prost(uint32, tag = "9")]
     pub nldbmcdiddo: u32,
     #[prost(uint32, tag = "12")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3047,7 +3047,7 @@ pub struct Jfakampdfoh {
     #[prost(message, repeated, tag = "1")]
     pub kmolligmkhi: ::prost::alloc::vec::Vec<Modfpkkndjn>,
     #[prost(uint32, tag = "5")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3063,7 +3063,7 @@ pub struct Jejiboblomm {
     #[prost(uint32, tag = "10")]
     pub doncfepcdjc: u32,
     #[prost(uint32, tag = "5")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3077,7 +3077,7 @@ pub struct Kcfoamiiimg {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Hcfahafalod {
     #[prost(uint32, tag = "2")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3085,7 +3085,7 @@ pub struct Appnpodlloo {
     #[prost(uint32, tag = "14")]
     pub retcode: u32,
     #[prost(uint32, tag = "8")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(message, optional, tag = "9")]
     pub battle_info: ::core::option::Option<SceneBattleInfo>,
 }
@@ -3093,7 +3093,7 @@ pub struct Appnpodlloo {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Flbggaeonoa {
     #[prost(uint32, tag = "6")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(bool, tag = "15")]
     pub klfpokblolh: bool,
 }
@@ -3109,7 +3109,7 @@ pub struct Mkimmiicbml {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Gjoehmmdkea {
     #[prost(uint32, tag = "6")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(bool, tag = "8")]
     pub bmikmflhmjd: bool,
     #[prost(message, optional, tag = "10")]
@@ -3125,15 +3125,15 @@ pub struct Glojjlcilhl {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Fbnihoejkpc {
+pub struct Challenge {
     #[prost(uint32, tag = "3")]
     pub ijjfhfincfd: u32,
     #[prost(message, optional, tag = "7")]
-    pub leiglhbeaan: ::core::option::Option<Nlfkoddiafa>,
+    pub story_info: ::core::option::Option<Nlfkoddiafa>,
     #[prost(uint32, tag = "4")]
     pub oggklhikobo: u32,
     #[prost(uint32, tag = "13")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "11")]
     pub igncekegblh: u32,
     #[prost(uint32, tag = "15")]
@@ -3145,7 +3145,7 @@ pub struct Fbnihoejkpc {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Enehbffiogh {
+pub struct ChallengeReward {
     #[prost(uint32, tag = "13")]
     pub group_id: u32,
     #[prost(uint64, tag = "8")]
@@ -3161,16 +3161,16 @@ pub struct Nmlilpfiidn {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Iodpfnajifd {}
+pub struct GetChallengeCsReq {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Eeladibicji {
+pub struct GetChallengeScRsp {
     #[prost(message, repeated, tag = "7")]
-    pub obnffngnkfm: ::prost::alloc::vec::Vec<Enehbffiogh>,
+    pub challenge_reward_list: ::prost::alloc::vec::Vec<ChallengeReward>,
     #[prost(uint32, tag = "4")]
     pub knipkmeghia: u32,
     #[prost(message, repeated, tag = "2")]
-    pub elfejgoegcj: ::prost::alloc::vec::Vec<Fbnihoejkpc>,
+    pub challenge_list: ::prost::alloc::vec::Vec<Challenge>,
     #[prost(uint32, tag = "9")]
     pub retcode: u32,
     #[prost(message, repeated, tag = "8")]
@@ -3194,7 +3194,7 @@ pub struct Ofoekmkibeh {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Cbfiakcjcad {
+pub struct StartChallengeStoryInfo {
     #[prost(message, optional, tag = "15")]
     pub fdghhllajjp: ::core::option::Option<Plminjlicdd>,
     #[prost(message, optional, tag = "14")]
@@ -3202,27 +3202,27 @@ pub struct Cbfiakcjcad {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Bfpafgpmfib {
+pub struct StartChallengeCsReq { //Bfpafgpmfib
     #[prost(uint32, repeated, tag = "14")]
-    pub agblmgmiebi: ::prost::alloc::vec::Vec<u32>,
+    pub lineup_2: ::prost::alloc::vec::Vec<u32>, //agblmgmiebi
     #[prost(uint32, tag = "15")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(message, optional, tag = "3")]
-    pub leiglhbeaan: ::core::option::Option<Cbfiakcjcad>,
+    pub story_info: ::core::option::Option<StartChallengeStoryInfo>,
     #[prost(uint32, repeated, tag = "7")]
-    pub agkdhdbfocc: ::prost::alloc::vec::Vec<u32>,
+    pub lineup_1: ::prost::alloc::vec::Vec<u32>, //agkdhdbfocc
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ebpeajodomi {
+pub struct StartChallengeScRsp { //Ebpeajodomi
     #[prost(message, repeated, tag = "5")]
     pub lineup_list: ::prost::alloc::vec::Vec<LineupInfo>,
     #[prost(message, optional, tag = "8")]
-    pub leiglhbeaan: ::core::option::Option<Nlfkoddiafa>,
+    pub story_info: ::core::option::Option<Nlfkoddiafa>,
     #[prost(message, optional, tag = "10")]
     pub scene: ::core::option::Option<SceneInfo>,
     #[prost(message, optional, tag = "11")]
-    pub dggagjlffgl: ::core::option::Option<Ekoofibmile>,
+    pub challenge_info: ::core::option::Option<ChallengeInfo>,
     #[prost(uint32, tag = "2")]
     pub retcode: u32,
 }
@@ -3230,7 +3230,7 @@ pub struct Ebpeajodomi {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Cdjkjlkkpep {
     #[prost(uint32, tag = "6")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "15")]
     pub daimooemhjf: u32,
     #[prost(bool, tag = "12")]
@@ -3242,7 +3242,7 @@ pub struct Admffccheil {
     #[prost(message, optional, tag = "9")]
     pub lineup: ::core::option::Option<LineupInfo>,
     #[prost(message, optional, tag = "12")]
-    pub dggagjlffgl: ::core::option::Option<Ekoofibmile>,
+    pub challenge_info: ::core::option::Option<ChallengeInfo>,
     #[prost(message, optional, tag = "7")]
     pub scene: ::core::option::Option<SceneInfo>,
     #[prost(uint32, tag = "4")]
@@ -3275,7 +3275,7 @@ pub struct Bkamlmppdgl {
     #[prost(uint32, repeated, tag = "2")]
     pub mhicpdeekng: ::prost::alloc::vec::Vec<u32>,
     #[prost(uint32, tag = "12")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(bool, tag = "1")]
     pub bmikmflhmjd: bool,
 }
@@ -3311,11 +3311,11 @@ pub struct Gljplkjdmkl {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ekoofibmile {
+pub struct ChallengeInfo { //Ekoofibmile
     #[prost(uint32, tag = "15")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(message, optional, tag = "4")]
-    pub leiglhbeaan: ::core::option::Option<Gljplkjdmkl>,
+    pub story_info: ::core::option::Option<Gljplkjdmkl>,
     #[prost(uint32, tag = "3")]
     pub oggklhikobo: u32,
     #[prost(uint32, tag = "10")]
@@ -3328,21 +3328,21 @@ pub struct Ekoofibmile {
     pub extra_lineup_type: i32,
     #[prost(message, repeated, tag = "12")]
     pub cdihbhlbgap: ::prost::alloc::vec::Vec<Jghjjfejplg>,
-    #[prost(enumeration = "Kgfbcefhgbj", tag = "13")]
+    #[prost(enumeration = "ChallengeStatus", tag = "13")]
     pub status: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Gdfagmbmoja {}
+pub struct GetCurChallengeCsReq {} //Gdfagmbmoja
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Kmooenidjll {
+pub struct GetCurChallengeScRsp { //Kmooenidjll
     #[prost(uint32, tag = "4")]
     pub retcode: u32,
     #[prost(message, repeated, tag = "6")]
     pub lineup_list: ::prost::alloc::vec::Vec<LineupInfo>,
     #[prost(message, optional, tag = "15")]
-    pub dggagjlffgl: ::core::option::Option<Ekoofibmile>,
+    pub challenge_info: ::core::option::Option<ChallengeInfo>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3532,7 +3532,7 @@ pub struct Pdeaocdjmag {
     #[prost(message, optional, tag = "15")]
     pub ckioklmjcbg: ::core::option::Option<Gbmdggdknmb>,
     #[prost(uint32, repeated, tag = "13")]
-    pub agkdhdbfocc: ::prost::alloc::vec::Vec<u32>,
+    pub lineup_1: ::prost::alloc::vec::Vec<u32>,
     #[prost(map = "uint32, message", tag = "8")]
     pub kckmgdgifif: ::std::collections::HashMap<u32, Oefemmiagig>,
     #[prost(message, optional, tag = "12")]
@@ -3542,7 +3542,7 @@ pub struct Pdeaocdjmag {
     #[prost(map = "uint32, message", tag = "7")]
     pub padhagkggpb: ::std::collections::HashMap<u32, Fmgcmmojnph>,
     #[prost(uint32, repeated, tag = "2")]
-    pub agblmgmiebi: ::prost::alloc::vec::Vec<u32>,
+    pub lineup_2: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3592,7 +3592,7 @@ pub struct Fppnhghkkpf {
     #[prost(uint32, tag = "9")]
     pub hlfjjlgkjci: u32,
     #[prost(uint32, tag = "8")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "15")]
     pub kibkjoalook: u32,
 }
@@ -3897,7 +3897,7 @@ pub struct Pgicdahdhjd {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Oglpkndgkig {
     #[prost(message, optional, tag = "6")]
-    pub leiglhbeaan: ::core::option::Option<Pgicdahdhjd>,
+    pub story_info: ::core::option::Option<Pgicdahdhjd>,
     #[prost(enumeration = "Pgnfehpijne", tag = "3")]
     pub pajpmpkdekf: i32,
     #[prost(enumeration = "Lkokifliddm", tag = "12")]
@@ -4236,7 +4236,7 @@ pub struct Igboepobgle {
     #[prost(uint32, tag = "1")]
     pub retcode: u32,
     #[prost(message, optional, tag = "9")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(message, optional, tag = "6")]
     pub jffongfiijk: ::core::option::Option<Dkekpolbcme>,
     #[prost(message, optional, tag = "13")]
@@ -4254,7 +4254,7 @@ pub struct Oplgajnecfn {
     #[prost(message, optional, tag = "12")]
     pub jffongfiijk: ::core::option::Option<Dkekpolbcme>,
     #[prost(message, optional, tag = "3")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(uint32, tag = "4")]
     pub retcode: u32,
     #[prost(message, optional, tag = "2")]
@@ -4275,7 +4275,7 @@ pub struct Njfdfmocbdb {
     #[prost(message, optional, tag = "1")]
     pub apfchjmjcck: ::core::option::Option<Ciieplkohkk>,
     #[prost(message, optional, tag = "10")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(message, optional, tag = "6")]
     pub hgpjehkkhlk: ::core::option::Option<Ilacickknof>,
 }
@@ -4288,7 +4288,7 @@ pub struct Jkmepbenkgc {
     #[prost(message, optional, tag = "9")]
     pub gemhgmknbfd: ::core::option::Option<Ajpambehjkm>,
     #[prost(message, optional, tag = "6")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(message, optional, tag = "13")]
     pub hgpjehkkhlk: ::core::option::Option<Ilacickknof>,
     #[prost(message, optional, tag = "11")]
@@ -4322,7 +4322,7 @@ pub struct Ioejamdglil {
     #[prost(message, optional, tag = "13")]
     pub jffongfiijk: ::core::option::Option<Dkekpolbcme>,
     #[prost(message, optional, tag = "10")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(uint32, tag = "6")]
     pub retcode: u32,
     #[prost(message, optional, tag = "5")]
@@ -4427,7 +4427,7 @@ pub struct Figfpligamo {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ogejkjgffma {
     #[prost(uint32, tag = "14")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4564,7 +4564,7 @@ pub struct Dipeeidggdd {
     #[prost(message, optional, tag = "8")]
     pub fbhddfiopmo: ::core::option::Option<Cnjkjbjckif>,
     #[prost(message, optional, tag = "14")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(message, optional, tag = "13")]
     pub jffongfiijk: ::core::option::Option<Dkekpolbcme>,
 }
@@ -4646,7 +4646,7 @@ pub struct Pgkpobmehkp {
     #[prost(message, optional, tag = "9")]
     pub apfchjmjcck: ::core::option::Option<Ciieplkohkk>,
     #[prost(message, optional, tag = "2")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(message, optional, tag = "10")]
     pub hgpjehkkhlk: ::core::option::Option<Ilacickknof>,
     #[prost(message, optional, tag = "3")]
@@ -4766,7 +4766,7 @@ pub struct Gjbjamlkeog {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Njnejcgdkjg {
     #[prost(message, optional, tag = "1")]
-    pub leiglhbeaan: ::core::option::Option<Blhoegdlhna>,
+    pub story_info: ::core::option::Option<Blhoegdlhna>,
     #[prost(uint32, tag = "9")]
     pub retcode: u32,
 }
@@ -5529,7 +5529,7 @@ pub struct SceneBattleInfo {
     #[prost(message, repeated, tag = "7")]
     pub monster_wave_list: ::prost::alloc::vec::Vec<SceneMonsterWave>,
     #[prost(map = "uint32, message", tag = "583")]
-    pub jelkfckaonl: ::std::collections::HashMap<u32, Cnngaoldopi>,
+    pub battle_target_info: ::std::collections::HashMap<u32, BattleTargetList>,
     #[prost(uint32, tag = "15")]
     pub battle_id: u32,
     #[prost(uint32, tag = "1")]
@@ -5828,7 +5828,7 @@ pub struct Phjdlbbmcli {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Mhkabalkmel {
     #[prost(uint32, tag = "11")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(message, optional, tag = "10")]
     pub adfooloodfk: ::core::option::Option<Kgmkkbmkcia>,
 }
@@ -5836,7 +5836,7 @@ pub struct Mhkabalkmel {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Faiihladmgd {
     #[prost(uint32, tag = "3")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(bool, tag = "1")]
     pub ajmaimfbcii: bool,
     #[prost(message, optional, tag = "9")]
@@ -7000,7 +7000,7 @@ pub struct Npnocpakfpf {
     #[prost(message, optional, tag = "4")]
     pub enenknligij: ::core::option::Option<Fbanomoneae>,
     #[prost(message, repeated, tag = "14")]
-    pub elfejgoegcj: ::prost::alloc::vec::Vec<Hgbelfjpcla>,
+    pub challenge_list: ::prost::alloc::vec::Vec<Hgbelfjpcla>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7174,7 +7174,7 @@ pub struct Kkagkkheocf {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Cibkfcpmfbo {
     #[prost(uint32, tag = "1")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7590,7 +7590,7 @@ pub struct Neflejnkdli {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Knbcegogagb {
     #[prost(uint32, tag = "8")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7606,7 +7606,7 @@ pub struct Cmabknghmnf {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Gepjehgkkde {
     #[prost(uint32, tag = "14")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "7")]
     pub uid: u32,
 }
@@ -7618,7 +7618,7 @@ pub struct Ajjcbnchelk {
     #[prost(uint32, tag = "4")]
     pub retcode: u32,
     #[prost(uint32, tag = "13")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(message, repeated, tag = "7")]
     pub dcdlbaijgjo: ::prost::alloc::vec::Vec<DisplayAvatarDetailInfo>,
 }
@@ -7952,7 +7952,7 @@ pub struct Ngjekndcdgf {
     #[prost(bool, tag = "15")]
     pub jieociklnka: bool,
     #[prost(uint32, tag = "12")]
-    pub odbjkadmlpk: u32,
+    pub challenge_id: u32,
     #[prost(uint32, tag = "4")]
     pub ijjfhfincfd: u32,
 }
@@ -7983,7 +7983,7 @@ pub struct Cailloopgkn {
     #[prost(message, repeated, tag = "2")]
     pub aodhcljdhin: ::prost::alloc::vec::Vec<Ifoknndeeco>,
     #[prost(message, repeated, tag = "10")]
-    pub elfejgoegcj: ::prost::alloc::vec::Vec<Ngjekndcdgf>,
+    pub challenge_list: ::prost::alloc::vec::Vec<Ngjekndcdgf>,
     #[prost(uint32, tag = "12")]
     pub level: u32,
     #[prost(uint32, tag = "9")]
@@ -10117,7 +10117,7 @@ pub struct Hakdgogckmp {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Bogjghfphae {
+pub struct FinishTalkMissionCsReq {
     #[prost(string, tag = "2")]
     pub foaeacjbdcc: ::prost::alloc::string::String,
     #[prost(message, repeated, tag = "5")]
@@ -10127,7 +10127,7 @@ pub struct Bogjghfphae {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ahkipalejcm {
+pub struct FinishTalkMissionScRsp {
     #[prost(uint32, tag = "3")]
     pub pjocnjdaigc: u32,
     #[prost(string, tag = "9")]
@@ -13862,7 +13862,7 @@ pub struct Ggaldmheepa {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lbpadphcbng {
     #[prost(message, repeated, tag = "3")]
-    pub elfejgoegcj: ::prost::alloc::vec::Vec<Cedfjjjkhbm>,
+    pub challenge_list: ::prost::alloc::vec::Vec<Cedfjjjkhbm>,
     #[prost(uint32, tag = "14")]
     pub retcode: u32,
 }
@@ -14666,7 +14666,7 @@ pub struct Lmhnnogkfei {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Nglcfjipejp {
     #[prost(uint32, tag = "5")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -15577,7 +15577,7 @@ pub struct Bfmlbadoppe {
     #[prost(uint32, tag = "3")]
     pub edahdalkobk: u32,
     #[prost(uint32, tag = "13")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -15961,7 +15961,7 @@ pub struct Mohpihlpghn {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ifjpllmdhpl {
     #[prost(uint32, tag = "15")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -16009,7 +16009,7 @@ pub struct Ecboblbpopa {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Kdaoldbhkhd {}
+pub struct GetRogueHandbookDataCsReq {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRogueHandbookDataScRsp {
@@ -16954,7 +16954,7 @@ pub struct Oncjhgmkpac {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Aogfhbnbobo {
     #[prost(uint32, tag = "12")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -17010,7 +17010,7 @@ pub struct Gdkkacniikh {
     #[prost(uint32, tag = "14")]
     pub dadkigdfahn: u32,
     #[prost(uint32, tag = "6")]
-    pub gdkpfajfjmc: u32,
+    pub buff_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -18302,27 +18302,27 @@ pub struct Minjnchgadg {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Kfgkicflahn {
+pub struct AssistMonsterWave {
     #[prost(uint32, repeated, tag = "2")]
-    pub nobkfliboog: ::prost::alloc::vec::Vec<u32>,
+    pub entity_id_list: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SceneCastSkillCsReq {
     #[prost(uint32, tag = "13")]
-    pub dmkhognonbl: u32,
+    pub caster_id: u32,
     #[prost(message, repeated, tag = "1")]
-    pub lchclicihdm: ::prost::alloc::vec::Vec<Kfgkicflahn>,
+    pub assist_monster_wave_list: ::prost::alloc::vec::Vec<AssistMonsterWave>,
     #[prost(uint32, tag = "15")]
     pub legdombcfld: u32,
     #[prost(message, repeated, tag = "5")]
     pub dynamic_values: ::prost::alloc::vec::Vec<Minjnchgadg>,
     #[prost(uint32, repeated, tag = "2")]
-    pub igkjjpeealc: ::prost::alloc::vec::Vec<u32>,
+    pub hit_target_entity_id_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(message, optional, tag = "6")]
-    pub mabofealjld: ::core::option::Option<MotionInfo>,
+    pub target_motion: ::core::option::Option<MotionInfo>,
     #[prost(uint32, tag = "12")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32, 
     #[prost(enumeration = "SceneCastSkillType", repeated, tag = "11")]
     pub bdcenahcdkg: ::prost::alloc::vec::Vec<i32>,
     #[prost(uint32, repeated, tag = "7")]
@@ -18336,7 +18336,7 @@ pub struct SceneCastSkillScRsp {
     #[prost(uint32, tag = "15")]
     pub retcode: u32,
     #[prost(uint32, tag = "12")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(message, optional, tag = "10")]
     pub battle_info: ::core::option::Option<SceneBattleInfo>,
     #[prost(message, repeated, tag = "3")]
@@ -18348,15 +18348,15 @@ pub struct Mjjmdbchmob {
     #[prost(uint32, tag = "1")]
     pub skill_index: u32,
     #[prost(uint32, tag = "12")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(uint32, tag = "4")]
-    pub dmkhognonbl: u32,
+    pub caster_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Jeobmjbfelh {
     #[prost(uint32, tag = "6")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(uint32, tag = "8")]
     pub retcode: u32,
 }
@@ -18364,7 +18364,7 @@ pub struct Jeobmjbfelh {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Gccnlchnmla {
     #[prost(uint32, tag = "10")]
-    pub jkdaceoekll: u32,
+    pub attacked_group_id: u32,
     #[prost(uint32, tag = "8")]
     pub mp: u32,
 }
@@ -18724,13 +18724,13 @@ pub struct Dekbnohhafj {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Fjmnikjncdh {
+pub struct SceneEnterStageCsReq { //Fjmnikjncdh 
     #[prost(uint32, tag = "1")]
     pub stage_id: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Bllonboflbg {
+pub struct SceneEnterStageScRsp { //Bllonboflbg
     #[prost(message, optional, tag = "8")]
     pub battle_info: ::core::option::Option<SceneBattleInfo>,
     #[prost(uint32, tag = "13")]
@@ -18796,7 +18796,7 @@ pub struct EnterSceneByServerScNotify {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Kbnfnblmnnc {
+pub struct ScenePlaneEventScNotify {
     #[prost(message, optional, tag = "11")]
     pub inpbbkjhegk: ::core::option::Option<ItemList>,
     #[prost(message, optional, tag = "4")]
@@ -19003,7 +19003,7 @@ pub struct SceneGroupRefreshScNotify {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Mffaehngkmk {
+pub struct GroupStateInfo {
     #[prost(uint32, tag = "14")]
     pub kafjddmebpi: u32,
     #[prost(uint32, tag = "7")]
@@ -19015,23 +19015,23 @@ pub struct Mffaehngkmk {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Afjioldjdac {
+pub struct GroupStateChangeCsReq {
     #[prost(message, optional, tag = "13")]
-    pub ecglaijolji: ::core::option::Option<Mffaehngkmk>,
+    pub group_state_info: ::core::option::Option<GroupStateInfo>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Adeloidmhaj {
+pub struct GroupStateChangeScRsp {
     #[prost(message, optional, tag = "2")]
-    pub ecglaijolji: ::core::option::Option<Mffaehngkmk>,
+    pub group_state_info: ::core::option::Option<GroupStateInfo>,
     #[prost(uint32, tag = "15")]
     pub retcode: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ibklimbncaj {
+pub struct GroupStateChangeScNotify {
     #[prost(message, optional, tag = "3")]
-    pub ecglaijolji: ::core::option::Option<Mffaehngkmk>,
+    pub group_state_info: ::core::option::Option<GroupStateInfo>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19096,13 +19096,13 @@ pub struct Bdkgcjiojgp {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Fhanminamdm {
     #[prost(uint32, repeated, tag = "9")]
-    pub nobkfliboog: ::prost::alloc::vec::Vec<u32>,
+    pub entity_id_list: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Hcfaiekfahh {
     #[prost(uint32, repeated, tag = "3")]
-    pub nobkfliboog: ::prost::alloc::vec::Vec<u32>,
+    pub entity_id_list: ::prost::alloc::vec::Vec<u32>,
     #[prost(uint32, tag = "10")]
     pub retcode: u32,
 }
@@ -19243,9 +19243,9 @@ pub struct Goods {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Ipljnkegfch {
+pub struct GetShopListCsReq {
     #[prost(uint32, tag = "2")]
-    pub edhoecbcbjo: u32,
+    pub shop_type: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19863,13 +19863,13 @@ pub struct Pghekcopokm {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Peabfdfkmim {
+pub struct GetFirstTalkByPerformanceNpcCsReq {
     #[prost(uint32, repeated, tag = "14")]
     pub kajphbfibik: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Jmpodfchomf {
+pub struct GetFirstTalkByPerformanceNpcScRsp {
     #[prost(uint32, tag = "8")]
     pub retcode: u32,
     #[prost(message, repeated, tag = "10")]
@@ -20879,7 +20879,7 @@ pub struct Mfmikggndbp {
     #[prost(uint32, tag = "14")]
     pub id: u32,
     #[prost(message, optional, tag = "12")]
-    pub ecglaijolji: ::core::option::Option<Mffaehngkmk>,
+    pub group_state_info: ::core::option::Option<GroupStateInfo>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -20959,7 +20959,7 @@ pub struct Fihjgbiiclm {
     #[prost(message, optional, tag = "13")]
     pub canocbklmcl: ::core::option::Option<Vector>,
     #[prost(uint32, repeated, tag = "5")]
-    pub igkjjpeealc: ::prost::alloc::vec::Vec<u32>,
+    pub hit_target_entity_id_list: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -21001,7 +21001,7 @@ pub struct Cmbofcaaonk {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Jacafgbbhog {
     #[prost(uint32, repeated, tag = "6")]
-    pub igkjjpeealc: ::prost::alloc::vec::Vec<u32>,
+    pub hit_target_entity_id_list: ::prost::alloc::vec::Vec<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -28155,23 +28155,23 @@ impl CmdChallengeType {
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum Kgfbcefhgbj {
+pub enum ChallengeStatus {
     ChallengeUnknown = 0,
     ChallengeDoing = 1,
     ChallengeFinish = 2,
     ChallengeFailed = 3,
 }
-impl Kgfbcefhgbj {
+impl ChallengeStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Kgfbcefhgbj::ChallengeUnknown => "CHALLENGE_UNKNOWN",
-            Kgfbcefhgbj::ChallengeDoing => "CHALLENGE_DOING",
-            Kgfbcefhgbj::ChallengeFinish => "CHALLENGE_FINISH",
-            Kgfbcefhgbj::ChallengeFailed => "CHALLENGE_FAILED",
+            ChallengeStatus::ChallengeUnknown => "CHALLENGE_UNKNOWN",
+            ChallengeStatus::ChallengeDoing => "CHALLENGE_DOING",
+            ChallengeStatus::ChallengeFinish => "CHALLENGE_FINISH",
+            ChallengeStatus::ChallengeFailed => "CHALLENGE_FAILED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.

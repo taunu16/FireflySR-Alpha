@@ -233,6 +233,91 @@ impl AvatarManager {
             .collect()
     }
 
+    pub fn avatar_list_battle_proto(&self, avatars: Vec<LineupAvatarBin>) -> Vec<BattleAvatar> {
+        let player_info = self.player_info.borrow();
+        let avatar_comp = player_info.data.avatar_bin.as_ref().unwrap();
+        let item_comp = player_info.data.item_bin.as_ref().unwrap();
+        let hero_comp = player_info.data.hero_bin.as_ref().unwrap();
+
+        avatars
+            .iter()
+            .map(|l| {
+                let avatar = avatar_comp
+                    .avatar_list
+                    .iter()
+                    .find(|a| a.avatar_id == l.avatar_id)
+                    .unwrap();
+
+                let equipment = item_comp
+                    .equipment_list
+                    .iter()
+                    .find(|e| e.unique_id == avatar.equipment_unique_id);
+
+                BattleAvatar {
+                    index: l.slot,
+                    id: if l.avatar_id == 8001 {
+                        hero_comp.cur_basic_type as u32
+                    } else {
+                        l.avatar_id
+                    },
+                    level: avatar.level,
+                    promotion: avatar.promotion,
+                    rank: avatar.rank,
+                    hp: l.hp,
+                    avatar_type: l.avatar_type,
+                    sp: Some(AmountInfo {
+                        cur_amount: l.sp,
+                        max_amount: 10000,
+                    }),
+                    equipment_list: equipment.map_or(Vec::new(), |e| {
+                        vec![BattleEquipment {
+                            id: e.tid,
+                            level: e.level,
+                            promotion: e.promotion,
+                            rank: e.rank,
+                        }]
+                    }),
+                    skilltree_list: avatar
+                        .skill_tree_list
+                        .iter()
+                        .map(|st| AvatarSkillTree {
+                            point_id: st.point_id,
+                            level: st.level,
+                        })
+                        .collect(),
+                    relic_list: avatar
+                        .relic_map
+                        .iter()
+                        .map(|(_, uid)| {
+                            let relic = item_comp
+                                .relic_list
+                                .iter()
+                                .find(|r| r.unique_id == *uid)
+                                .unwrap();
+
+                            BattleRelic {
+                                id: relic.tid,
+                                level: relic.level,
+                                main_affix_id: relic.main_affix_id,
+                                sub_affix_list: relic
+                                    .sub_affix_list
+                                    .iter()
+                                    .map(|a| RelicAffix {
+                                        affix_id: a.affix_id,
+                                        step: a.step,
+                                        cnt: a.cnt,
+                                    })
+                                    .collect(),
+                                ..Default::default()
+                            }
+                        })
+                        .collect(),
+                    ..Default::default()
+                }
+            })
+            .collect()
+    }
+
     const fn base_avatar_id(avatar_id: u32) -> u32 {
         if avatar_id > 8000 {
             Self::HERO_AVATAR_ID

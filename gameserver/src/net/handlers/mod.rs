@@ -1,14 +1,21 @@
+mod archive;
 mod authentication;
 mod avatar;
 mod battle;
+mod challenge;
 mod chat;
+mod events;
 mod friend;
+mod interact;
 mod item;
 mod lineup;
 mod map;
 mod mission;
+mod npc;
 mod player;
+mod rogue;
 mod scene;
+mod shop;
 mod tutorial;
 
 use anyhow::Result;
@@ -17,17 +24,23 @@ use proto::*;
 
 use super::PlayerSession;
 
+pub use archive::*;
 pub use authentication::*;
 pub use avatar::*;
 pub use battle::*;
+pub use challenge::*;
 pub use chat::*;
+pub use events::*;
 pub use friend::*;
+pub use interact::*;
 pub use item::*;
 pub use lineup::*;
 pub use map::*;
 pub use mission::*;
+pub use npc::*;
 pub use player::*;
 pub use scene::*;
+pub use shop::*;
 pub use tutorial::*;
 
 #[allow(unused_imports)]
@@ -76,7 +89,7 @@ macro_rules! dummy {
                         _ => return Err(anyhow::anyhow!("Invalid request id {req_id:?}")),
                     };
 
-
+                    tracing::info_span!("Sent dummy response", cmd_type = cmd_type);
 
                     self.send_dummy(cmd_type).await?;
                     Ok(())
@@ -87,7 +100,7 @@ macro_rules! dummy {
 }
 
 dummy! {
-    InteractProp,
+    // InteractProp,
     GetFirstTalkNpc,
     GetMarkItemList,
     GetAllServerPrefsData,
@@ -112,11 +125,11 @@ dummy! {
     GetTreasureDungeonActivityData,
     PlayerReturnInfoQuery,
     GetPlayerBoardData,
-    GetActivityScheduleConfig,
+    // GetActivityScheduleConfig,
     GetMissionData,
     GetMissionEventData,
-    GetChallenge,
-    GetCurChallenge,
+    // GetChallenge,
+    // GetCurChallenge,
     GetRogueInfo,
     GetExpeditionData,
     GetJukeboxData,
@@ -166,5 +179,7 @@ dummy! {
     GetTrainVisitorRegister,
     GetLoginChatInfo,
     GetFeverTimeActivityData,
-    GetAllSaveRaid
+    GetAllSaveRaid,
+    
+    RogueTournGetPermanentTalentInfo
 }

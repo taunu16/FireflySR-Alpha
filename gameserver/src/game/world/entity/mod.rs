@@ -1,9 +1,13 @@
 use proto::{SceneEntityInfo, VectorBin};
 
 mod actor;
+mod monster;
+mod npc;
 mod prop;
 
 pub use actor::SceneActor;
+pub use monster::SceneMonster;
+pub use npc::SceneNpc;
 pub use prop::SceneProp;
 
 #[allow(dead_code)]

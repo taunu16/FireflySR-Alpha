@@ -1,4 +1,8 @@
+use std::collections::HashMap;
+
 use serde::Deserialize;
+
+use super::level::PropState;
 
 #[derive(Default, Deserialize)]
 #[serde(rename_all = "PascalCase")]
@@ -324,4 +328,421 @@ pub struct MapEntranceConfig {
     pub id: u32,
     #[serde(rename = "PlaneID")]
     pub plane_id: u32,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct MainMissionConfig {
+    pub sub_reward_list: Vec<u32>,
+    #[serde(rename = "MainMissionID")]
+    pub main_mission_id: u32,
+    pub display_priority: u32,
+    pub next_track_main_mission: u32,
+    pub track_weight: u32,
+    pub mission_advance: u32,
+    #[serde(rename = "RewardID")]
+    pub reward_id: u32,
+    #[serde(rename = "DisplayRewardID")]
+    pub display_reward_id: u32,
+    pub mission_pack: u32,
+    #[serde(rename = "ChapterID")]
+    pub chapter_id: u32,
+    pub is_in_raid: bool,
+    pub is_display_activity_icon: bool,
+    pub inited: bool,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ActivityPanelConfig {
+    #[serde(rename = "UIPrefab")]
+    pub ui_prefab: String,
+    pub type_param: Vec<u32>,
+    pub unlock_conditions: String,
+    pub tab_icon: String,
+    #[serde(rename = "PanelID")]
+    pub panel_id: u32,
+    #[serde(rename = "Type")]
+    pub main_mission_config_type: u32,
+    #[serde(rename = "ActivityModuleID")]
+    pub activity_module_id: u32,
+    pub hide_quest: u32,
+    pub sort_weight: u32,
+    #[serde(rename = "ActivityThemeID")]
+    pub activity_theme_id: u32,
+    #[serde(rename = "ResidentPanelUnlockModuleID")]
+    pub resident_panel_unlock_module_id: u32,
+    #[serde(rename = "EarlyAccessContentID")]
+    pub early_access_content_id: u32,
+    pub display_item_manual_sort: bool,
+    pub is_activity_have_resident_part: bool,
+    pub is_resident_panel: bool,
+    pub daily_hint: bool,
+    pub is_skip_switch_story_line: bool,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ChallengeMazeConfig {
+    pub damage_type1: Vec<DamageType>,
+    pub damage_type2: Vec<DamageType>,
+    #[serde(rename = "ChallengeTargetID")]
+    pub challenge_target_id: Vec<u32>,
+    #[serde(rename = "MonsterID1")]
+    pub monster_id1: Vec<Option<serde_json::Value>>,
+    #[serde(rename = "MonsterID2")]
+    pub monster_id2: Vec<Option<serde_json::Value>>,
+    pub config_list1: Vec<u32>,
+    #[serde(rename = "NpcMonsterIDList1")]
+    pub npc_monster_id_list1: Vec<u32>,
+    #[serde(rename = "EventIDList1")]
+    pub event_id_list1: Vec<u32>,
+    pub config_list2: Vec<u32>,
+    #[serde(rename = "NpcMonsterIDList2")]
+    pub npc_monster_id_list2: Vec<u32>,
+    #[serde(rename = "EventIDList2")]
+    pub event_id_list2: Vec<u32>,
+    #[serde(rename = "ID")]
+    pub id: u32,
+    #[serde(rename = "GroupID")]
+    pub group_id: u32,
+    #[serde(rename = "MapEntranceID")]
+    pub map_entrance_id: u32,
+    #[serde(rename = "MapEntranceID2")]
+    pub map_entrance_id2: u32,
+    pub pre_level: u32,
+    #[serde(rename = "PreChallengeMazeID")]
+    pub pre_challenge_maze_id: u32,
+    pub floor: u32,
+    #[serde(rename = "RewardID")]
+    pub reward_id: u32,
+    pub stage_num: u32,
+    pub challenge_count_down: u32,
+    #[serde(rename = "MazeGroupID1")]
+    pub maze_group_id1: u32,
+    #[serde(rename = "MazeGroupID2")]
+    pub maze_group_id2: u32,
+    #[serde(rename = "MazeBuffID")]
+    pub maze_buff_id: u32,
+}
+
+#[derive(Deserialize)]
+pub enum DamageType {
+    Fire,
+    Ice,
+    Imaginary,
+    Physical,
+    Quantum,
+    Thunder,
+    Wind,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct PlaneEventConfig {
+    pub drop_list: Vec<u32>,
+    pub display_item_list: Vec<Option<serde_json::Value>>,
+    #[serde(rename = "EventID")]
+    pub event_id: u32,
+    pub world_level: u32,
+    #[serde(rename = "StageID")]
+    pub stage_id: u32,
+    pub reward: u32,
+    pub avatar_exp_reward: u32,
+    pub is_use_monster_drop: bool,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct InteractConfig {
+    pub item_cost_list: Vec<ItemCostList>,
+    #[serde(rename = "InteractID")]
+    pub interact_id: u32,
+    pub src_state: PropState,
+    pub target_state: PropState,
+    pub interact_cost_type: InteractCostType,
+    pub is_event: bool,
+}
+
+#[derive(Default, Deserialize)]
+pub enum InteractCostType {
+    #[serde(rename = "CheckItem")]
+    CheckItem,
+    #[serde(rename = "CostItem")]
+    CostItem,
+    #[default]
+    None,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ItemCostList {
+    #[serde(rename = "ItemID")]
+    pub item_id: u32,
+    pub item_num: u32,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct RewardConfig {
+    #[serde(rename = "RewardID")]
+    pub reward_id: u32,
+    pub hcoin: u32,
+    #[serde(rename = "ItemID_1")]
+    pub item_id_1: u32,
+    #[serde(rename = "Count_1")]
+    pub count_1: u32,
+    #[serde(rename = "Level_1")]
+    pub level_1: u32,
+    #[serde(rename = "Rank_1")]
+    pub rank_1: u32,
+    #[serde(rename = "ItemID_2")]
+    pub item_id_2: u32,
+    #[serde(rename = "Count_2")]
+    pub count_2: u32,
+    #[serde(rename = "Level_2")]
+    pub level_2: u32,
+    #[serde(rename = "Rank_2")]
+    pub rank_2: u32,
+    #[serde(rename = "ItemID_3")]
+    pub item_id_3: u32,
+    #[serde(rename = "Count_3")]
+    pub count_3: u32,
+    #[serde(rename = "Level_3")]
+    pub level_3: u32,
+    #[serde(rename = "Rank_3")]
+    pub rank_3: u32,
+    #[serde(rename = "ItemID_4")]
+    pub item_id_4: u32,
+    #[serde(rename = "Count_4")]
+    pub count_4: u32,
+    #[serde(rename = "Level_4")]
+    pub level_4: u32,
+    #[serde(rename = "Rank_4")]
+    pub rank_4: u32,
+    #[serde(rename = "ItemID_5")]
+    pub item_id_5: u32,
+    #[serde(rename = "Count_5")]
+    pub count_5: u32,
+    #[serde(rename = "Level_5")]
+    pub level_5: u32,
+    #[serde(rename = "Rank_5")]
+    pub rank_5: u32,
+    #[serde(rename = "ItemID_6")]
+    pub item_id_6: u32,
+    #[serde(rename = "Count_6")]
+    pub count_6: u32,
+    #[serde(rename = "Level_6")]
+    pub level_6: u32,
+    #[serde(rename = "Rank_6")]
+    pub rank_6: u32,
+    pub is_special: bool,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ShopConfig {
+    pub shop_icon_path: String,
+    pub shop_bar: String,
+    pub limit_value1_list: Vec<u32>,
+    pub limit_value2_list: Vec<Option<serde_json::Value>>,
+    #[serde(rename = "ShopID")]
+    pub shop_id: u32,
+    pub shop_main_type: String,
+    pub shop_type: u32,
+    #[serde(rename = "ShopSortID")]
+    pub shop_sort_id: u32,
+    pub limit_type1: String,
+    #[serde(rename = "ScheduleDataID")]
+    pub schedule_data_id: u32,
+    #[serde(rename = "ActivityModuleID")]
+    pub activity_module_id: u32,
+    pub is_open: bool,
+    pub server_verification: bool,
+    pub hide_remain_time: bool,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ShopGoodsConfig {
+    pub currency_list: Vec<u32>,
+    pub currency_cost_list: Vec<u32>,
+    pub limit_value1_list: Vec<u32>,
+    pub limit_value2_list: Vec<Option<serde_json::Value>>,
+    pub on_shelf_value1_list: Vec<u32>,
+    #[serde(rename = "GoodsID")]
+    pub goods_id: u32,
+    #[serde(rename = "ItemID")]
+    pub item_id: u32,
+    #[serde(rename = "ItemGroupID")]
+    pub item_group_id: u32,
+    pub item_count: u32,
+    pub level: u32,
+    pub rank: u32,
+    #[serde(rename = "GoodsSortID")]
+    pub goods_sort_id: u32,
+    pub limit_type1: String,
+    pub limit_type2: String,
+    pub on_shelf_type1: String,
+    pub limit_times: u32,
+    pub refresh_type: String,
+    pub cycle_days: u32,
+    pub refresh_offset: u32,
+    #[serde(rename = "ShopID")]
+    pub shop_id: u32,
+    #[serde(rename = "ScheduleDataID")]
+    pub schedule_data_id: u32,
+    pub tag_type: u32,
+    pub tag_param: u32,
+    #[serde(rename = "ActivityModuleID")]
+    pub activity_module_id: u32,
+    pub is_limited_time_purchase: bool,
+    pub is_on_sale: bool,
+    pub is_new: bool,
+}
+
+#[derive(Default, Deserialize, Debug)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct MazePlaneConfig {
+    #[serde(rename = "FloorIDList")]
+    pub floor_id_list: Vec<u32>,
+    #[serde(rename = "PlaneID")]
+    pub plane_id: u32,
+    pub plane_type: PlaneType,
+    pub sub_type: u32,
+    pub maze_pool_type: u32,
+    #[serde(rename = "WorldID")]
+    pub world_id: u32,
+    #[serde(rename = "StartFloorID")]
+    pub start_floor_id: u32,
+}
+
+#[derive(Default, Deserialize, Clone, Debug)]
+pub enum PlaneType {
+    Unknown = 0,
+    #[serde(rename = "AetherDivide")]
+    AetherDivide = 7,
+    Challenge = 4,
+    Maze = 2,
+    Raid = 6,
+    Rogue = 5,
+    #[default]
+    Town = 1,
+    Train = 3,
+    #[serde(rename = "TrialActivity")]
+    TrialActivity = 8,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct StageConfig {
+    pub level_graph_path: String,
+    pub stage_ability_config: Vec<String>,
+    pub sub_level_graphs: Vec<HashMap<String, Option<String>>>,
+    pub monster_list: Vec<MonsterList>,
+    pub level_lose_condition: Vec<String>,
+    pub level_win_condition: Vec<String>,
+    pub trial_avatar_list: Vec<u32>,
+    #[serde(rename = "StageID")]
+    pub stage_id: u32,
+    pub stage_type: StageType,
+    pub hard_level_group: u32,
+    pub level: u32,
+    pub elite_group: u32,
+    pub battle_scoring_group: u32,
+    pub monster_warning_ratio: f64,
+    pub forbid_auto_battle: bool,
+    pub release: bool,
+    pub forbid_exit_battle: bool,
+    pub reset_battle_speed: bool,
+    pub processed_template_variables: ProcessedTemplateVariables,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(default)]
+pub struct ProcessedTemplateVariables {
+    #[serde(rename = "_Wave")]
+    pub wave: u32,
+    #[serde(rename = "_IsEliteBattle")]
+    pub is_elite_battle: u32,
+}
+
+#[derive(Default, Deserialize, PartialEq)]
+pub enum StageType {
+    #[serde(rename = "AetherDivide")]
+    AetherDivide,
+    #[serde(rename = "BattleCollege")]
+    BattleCollege,
+    #[serde(rename = "BoxingClub")]
+    BoxingClub,
+    Challenge,
+    #[serde(rename = "ClockParkActivity")]
+    ClockParkActivity,
+    Cocoon,
+    #[serde(rename = "EvolveBuildActivity")]
+    EvolveBuildActivity,
+    #[serde(rename = "FantasticStory")]
+    FantasticStory,
+    #[serde(rename = "FarmElement")]
+    FarmElement,
+    #[serde(rename = "FeverTimeActivity")]
+    FeverTimeActivity,
+    #[serde(rename = "FightActivity")]
+    FightActivity,
+    Heliobus,
+    #[default]
+    Mainline,
+    #[serde(rename = "PunkLord")]
+    PunkLord,
+    #[serde(rename = "RogueChallengeActivity")]
+    RogueChallengeActivity,
+    #[serde(rename = "RogueEndlessActivity")]
+    RogueEndlessActivity,
+    #[serde(rename = "RogueRelic")]
+    RogueRelic,
+    #[serde(rename = "StarFightActivity")]
+    StarFightActivity,
+    #[serde(rename = "StrongChallengeActivity")]
+    StrongChallengeActivity,
+    #[serde(rename = "TelevisionActivity")]
+    TelevisionActivity,
+    #[serde(rename = "TreasureDungeon")]
+    TreasureDungeon,
+    Trial,
+    #[serde(rename = "VerseSimulation")]
+    VerseSimulation,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct MonsterList {
+    pub monster0: u32,
+    pub monster1: u32,
+    pub monster2: u32,
+    pub monster3: u32,
+    pub monster4: u32,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+#[serde(default)]
+pub struct ChallengeStoryExtraConfig {
+    #[serde(rename = "BattleTargetID")]
+    pub battle_target_id: Vec<u32>,
+    #[serde(rename = "ID")]
+    pub id: u32,
+    pub turn_limit: u32,
+    pub clear_score: u32,
 }
