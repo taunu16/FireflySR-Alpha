@@ -24,8 +24,11 @@ pub async fn on_interact_prop_cs_req(
     session: &PlayerSession,
     body: &InteractPropCsReq
 ) -> Result<()> {
-    let player_info = session.player_info();
+    //let player_info = session.player_info();
     let scene_mgr = session.context.scene_mgr.borrow();
+
+    let item_mgr = session.context.item_mgr.borrow_mut();
+
     let mut state = PropState::Open;
 
     let (group_id, prop) = scene_mgr.get_prop(body.prop_entity_id).unwrap();
@@ -34,31 +37,37 @@ pub async fn on_interact_prop_cs_req(
         state = interact.target_state.clone();
     }
 
-    if let Some(event) = EXCEL_COLLECTION.plane_event_configs.iter().find(|e| e.event_id == prop.event_id() && e.world_level == player_info.data.basic_bin.as_ref().map(|a| a.world_level).unwrap_or(0)) {
+    if let Some(event) = EXCEL_COLLECTION.plane_event_configs.iter().find(|e| e.event_id == prop.event_id() && e.world_level == session.player_info().data.clone().basic_bin.as_ref().map(|a| a.world_level).unwrap_or(0)) {
         let reward = EXCEL_COLLECTION.reward_configs.iter().find(|r| r.reward_id == event.reward);
+
+        let rewards = if let Some(reward) = reward {
+            listify_rewards!(reward, 1, 2, 3, 4, 5, 6)
+        } else {vec![]};
+
+        let drops = event.drop_list.iter().map(|id|
+            Item {
+               item_id: *id,
+               num: 1,
+               ..Default::default()
+        }).collect::<Vec<_>>();
+
         let _ = session.send(
             CMD_SCENE_PLANE_EVENT_SC_NOTIFY, 
             ScenePlaneEventScNotify { 
                 emeofonpphl: Some(ItemList {
-                    item_list: event.drop_list.iter().map(|id|
-                        Item {
-                            item_id: *id,
-                            num: 1,
-                            ..Default::default()
-                        }
-                    ).collect()
+                    item_list: drops.clone()
                 }),
                 inpbbkjhegk: Some(ItemList {
-                    item_list: if let Some(reward) = reward {
-                        listify_rewards!(reward, 1, 2, 3, 4, 5, 6)
-                    } else {vec![]}
+                    item_list: rewards.clone()
                 }),
                 ..Default::default()
             }
         ).await;
+
+        item_mgr.give_items(session, rewards.into_iter().chain(drops).collect()).await?;
     }
 
-    drop(player_info);
+    //drop(player_info);
     scene_mgr.set_prop_state(group_id, body.prop_entity_id, state.clone() as u32);
 
     if state == PropState::ChestUsed {

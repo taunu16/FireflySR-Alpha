@@ -235,26 +235,109 @@ pub struct TriggerParam {
 #[serde(rename_all = "PascalCase")]
 #[serde(default)]
 pub struct ItemConfig {
-    pub custom_data_list: Vec<u32>,
+    pub item_icon_path: String,
+    pub item_figure_icon_path: String,
+    pub item_currency_icon_path: String,
+    pub item_avatar_icon_path: String,
+    pub custom_data_list: Vec<i64>,
+    #[serde(rename = "ReturnItemIDList")]
+    pub return_item_id_list: Vec<ReturnItemIdList>,
     #[serde(rename = "ID")]
     pub id: u32,
+    pub item_main_type: XItemType,
+    pub item_sub_type: XItemType,
     pub inventory_display_tag: u32,
-    pub is_visible: bool,
-    pub item_avatar_icon_path: String,
-    #[serde(rename = "ItemBGDesc")]
-    pub item_bgdesc: i64,
-    pub item_currency_icon_path: String,
-    pub item_desc: i64,
-    pub item_figure_icon_path: String,
-    pub item_icon_path: String,
-    pub item_main_type: String,
-    pub item_name: i64,
-    pub pile_limit: u32,
+    pub rarity: Rarity,
     pub purpose_type: u32,
-    pub rarity: String,
-    pub return_item_id_list: Vec<u32>,
+    pub pile_limit: u32,
+    //pub use_method: UseMethod,
+    #[serde(rename = "UseDataID")]
     pub use_data_id: u32,
+    pub item_group: u32,
+    pub sell_type: SellType,
+    #[serde(rename = "isVisible")]
+    pub is_visible: bool,
+    pub is_sellable: bool,
+    pub is_show_red_dot: bool,
 }
+
+#[derive(Default, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct ReturnItemIdList {
+    #[serde(rename = "ItemID")]
+    pub item_id: u32,
+    pub item_num: u32,
+}
+
+#[derive(Default, Deserialize, PartialEq)]
+pub enum XItemType {
+    #[serde(rename = "AetherSkill")]
+    AetherSkill,
+    #[serde(rename = "AetherSpirit")]
+    AetherSpirit,
+    #[serde(rename = "AvatarCard")]
+    AvatarCard,
+    Book,
+    #[serde(rename = "ChatBubble")]
+    ChatBubble,
+    #[serde(rename = "ChessRogueDiceSurface")]
+    ChessRogueDiceSurface,
+    Display,
+    Eidolon,
+    Equipment,
+    Food,
+    #[serde(rename = "ForceOpitonalGift")]
+    ForceOpitonalGift,
+    Formula,
+    Gift,
+    #[serde(rename = "HeadIcon")]
+    HeadIcon,
+    #[default]
+    Material,
+    Mission,
+    #[serde(rename = "MuseumExhibit")]
+    MuseumExhibit,
+    #[serde(rename = "MuseumStuff")]
+    MuseumStuff,
+    #[serde(rename = "MusicAlbum")]
+    MusicAlbum,
+    #[serde(rename = "PhoneTheme")]
+    PhoneTheme,
+    Relic,
+    #[serde(rename = "RelicRarityShowOnly")]
+    RelicRarityShowOnly,
+    #[serde(rename = "RelicSetShowOnly")]
+    RelicSetShowOnly,
+    #[serde(rename = "RogueMedal")]
+    RogueMedal,
+    #[serde(rename = "TravelBrochurePaster")]
+    TravelBrochurePaster,
+    Usable,
+    Virtual,
+}
+
+#[derive(Default, Deserialize)]
+pub enum Rarity {
+    #[default]
+    Normal,
+    #[serde(rename = "NotNormal")]
+    NotNormal,
+    Rare,
+    #[serde(rename = "SuperRare")]
+    SuperRare,
+    #[serde(rename = "VeryRare")]
+    VeryRare,
+}
+
+#[derive(Default, Deserialize)]
+pub enum SellType {
+    #[default]
+    Destroy,
+    Sell,
+    #[serde(rename = "UnSellable")]
+    UnSellable,
+}
+
 
 #[derive(Default, Deserialize)]
 #[serde(rename_all = "PascalCase")]

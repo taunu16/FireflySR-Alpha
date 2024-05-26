@@ -1,6 +1,7 @@
 use anyhow::{anyhow, Result};
-use common::data::EXCEL_COLLECTION;
+use common::data::{EXCEL_COLLECTION, XItemType};
 use proto::*;
+use crate::net::PlayerSession;
 
 use super::*;
 
@@ -17,6 +18,41 @@ impl ItemManager {
         self.create_comp();
         self.give_all_equipment();
         self.add_material(1, 1000000).unwrap();
+    }
+
+    pub async fn give_items(&self, session: &PlayerSession, items: Vec<Item>) -> Result<()> {
+        for item in &items {
+            if item.item_id == 0 {
+                continue
+            }
+
+            let Some(config) = EXCEL_COLLECTION
+                .item_configs
+                .iter()
+                .find(|c| c.id == item.item_id) else {
+                return Err(anyhow!("Material with id {} doesn't exist", item.item_id));
+            };
+
+            match config.item_main_type {
+                XItemType::Equipment => self.give_equipment_adv(item.item_id, item.level, item.rank, item.promotion),
+                XItemType::Relic => self.give_relic(item.item_id, item.level, 1, vec![]),
+                _ => self.add_material(item.item_id, item.num)
+            }?
+        }
+        
+        //TODO improve this so it does not send whole inventory
+        session.send(
+            CMD_PLAYER_SYNC_SC_NOTIFY, 
+            PlayerSyncScNotify {
+                equipment_list: self.equipment_list_proto(),
+                relic_list: self.relic_list_proto(),
+                material_list: self.material_list_proto(),
+                ..Default::default()
+            }
+        ).await?;
+    
+
+        Ok(())
     }
 
     pub fn add_material(&self, material_id: u32, amount: u32) -> Result<()> {
@@ -134,6 +170,30 @@ impl ItemManager {
             level: 80,
             rank: 1,
             promotion: 6,
+            ..Default::default()
+        });
+
+        Ok(())
+    }
+
+    pub fn give_equipment_adv(&self, equipment_id: u32, level: u32, rank: u32, promotion: u32) -> Result<()> {
+        let config = EXCEL_COLLECTION
+            .equipment_configs
+            .iter()
+            .find(|c| c.equipment_id == equipment_id)
+            .ok_or(anyhow!("Equipment with id {equipment_id} doesn't exist"))?;
+
+        let unique_id = self.next_unique_id();
+
+        let mut player_info = self.player_info.borrow_mut();
+        let item_comp = player_info.data.item_bin.as_mut().unwrap();
+
+        item_comp.equipment_list.push(EquipmentBin {
+            tid: config.equipment_id,
+            unique_id,
+            level,
+            rank,
+            promotion,
             ..Default::default()
         });
 
